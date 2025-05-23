@@ -1,0 +1,35 @@
+{
+  "name": "@yield-tech/sdk-nodejs",
+  "version": "0.5.0",
+  "description": "The official Yield SDK for Node.js",
+  "author": "Yield (https://www.paywithyield.com)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "src",
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "eslint && tsc",
+    "test": "tsx --test tests/*.test.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@types/node": "^22.15.18",
+    "eslint": "^9.27.0",
+    "globals": "^16.1.0",
+    "node-fetch": "^3.3.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1"
+  }
+}
