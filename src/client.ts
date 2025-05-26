@@ -11,7 +11,7 @@ export class Client {
         this.order = new OrderClient(this.base.order);
     }
 
-    public static async create(apiKey: string, options: ClientOptions): Promise<Client> {
+    public static async create(apiKey: string, options: ClientOptions = {}): Promise<Client> {
         return new Client(await BaseClient.create(apiKey, options));
     }
 }
@@ -25,7 +25,7 @@ export class BaseClient {
         this.order = new OrderBaseClient(this.api);
     }
 
-    public static async create(apiKey: string, options: ClientOptions): Promise<BaseClient> {
+    public static async create(apiKey: string, options: ClientOptions = {}): Promise<BaseClient> {
         return new BaseClient(await APIClient.create(apiKey, options));
     }
 }

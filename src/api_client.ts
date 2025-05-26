@@ -24,7 +24,7 @@ export class APIClient {
         private readonly clientVersion: string,
     ) {}
 
-    public static async create(apiKeyString: string, options: ClientOptions): Promise<APIClient> {
+    public static async create(apiKeyString: string, options: ClientOptions = {}): Promise<APIClient> {
         let apiKeyParts = apiKeyString.split("$");
         if (apiKeyParts.length !== 3) {
             throw new Error("Invalid Yield API key");
