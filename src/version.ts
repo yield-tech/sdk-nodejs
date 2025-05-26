@@ -1,4 +1,4 @@
-export const version = "0.5.1";
+export const version = "0.5.2";
 
 const SUPPORTED_RUNTIMES = [
     "bun",

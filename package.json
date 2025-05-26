@@ -1,6 +1,6 @@
 {
   "name": "@yield-tech/sdk-nodejs",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "The official Yield SDK for Node.js",
   "author": "Yield (https://www.paywithyield.com)",
   "license": "Apache-2.0",
