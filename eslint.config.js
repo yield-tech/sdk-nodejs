@@ -100,7 +100,7 @@ export default defineConfig([
         },
     },
     {
-        files: ["**/*.js"],
+        files: ["**/*.js", "tests/**/*.ts"],
         extends: [ts.configs.disableTypeChecked],
     },
     {

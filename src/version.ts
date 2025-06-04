@@ -1,4 +1,4 @@
-export const version = "0.5.3";
+export const version = "0.7.0";
 
 const SUPPORTED_RUNTIMES = [
     "bun",
@@ -24,8 +24,7 @@ function getRuntimeVersion(): [string] | [string, string] {
 }
 
 export function getClientVersion(): string {
-    let sdkVersion = version;
     let runtimeVersion = getRuntimeVersion().join(" ");
 
-    return `Yield-SDK-NodeJS/${sdkVersion} (${runtimeVersion})`;
+    return `Yield-SDK-NodeJS/${version} (${runtimeVersion})`;
 }

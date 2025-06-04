@@ -1,4 +1,5 @@
-import { APIClient, APIResult } from "../../api_client.ts";
+import { APIClient } from "../../api_client.ts";
+import { APIResult } from "../../api_result.ts";
 import { Order, OrderCreateParams, OrderCreatePayload } from "./order_payloads.ts";
 
 export class OrderClient {
@@ -21,7 +22,8 @@ export class OrderBaseClient {
     ) {}
 
     public async fetch(id: string): Promise<APIResult<Order>> {
-        let response = await this.api.runQuery(`/order/fetch/${id}`);
+        let encodedID = encodeURIComponent(id);
+        let response = await this.api.runQuery(`/order/fetch/${encodedID}`);
 
         return await APIClient.processResponse(response, Order.fromPayload);
     }

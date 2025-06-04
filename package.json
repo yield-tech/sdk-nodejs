@@ -1,22 +1,24 @@
 {
   "name": "@yield-tech/sdk-nodejs",
-  "version": "0.5.3",
+  "version": "0.7.0",
   "description": "The official Yield SDK for Node.js",
-  "author": "Yield (https://www.paywithyield.com)",
   "license": "Apache-2.0",
-  "type": "module",
+  "author": "Yield (https://www.paywithyield.com)",
+  "homepage": "https://github.com/yield-tech/sdk-nodejs/blob/main/README.md",
+  "repository": "github:yield-tech/sdk-nodejs",
   "engines": {
     "node": ">=20.0.0"
   },
   "packageManager": "pnpm@10.11.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "README.md",
     "LICENSE",
     "src",
     "dist"
   ],
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "eslint && tsc",
     "test": "tsx --test tests/*.test.ts"

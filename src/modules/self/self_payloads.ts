@@ -1,4 +1,4 @@
-import { assertObject, assertString } from "../../utils.ts";
+import * as t from "../../utils/type_utils.ts";
 
 export class SelfInfo {
     constructor(
@@ -9,9 +9,9 @@ export class SelfInfo {
 
     public static fromPayload(payload: Record<string, unknown>): SelfInfo {
         return new SelfInfo(
-            assertString(payload["id"]),
-            assertString(payload["name"]),
-            SelfOrganizationInfo.fromPayload(assertObject(payload["organization"])),
+            t.expectString(payload["id"]),
+            t.expectString(payload["name"]),
+            SelfOrganizationInfo.fromPayload(t.expectRecord(payload["organization"])),
         );
     }
 }
@@ -25,9 +25,9 @@ export class SelfOrganizationInfo {
 
     public static fromPayload(payload: Record<string, unknown>): SelfOrganizationInfo {
         return new SelfOrganizationInfo(
-            assertString(payload["id"]),
-            assertString(payload["registered_name"]),
-            payload["trade_name"] == null ? null : assertString(payload["trade_name"]),
+            t.expectString(payload["id"]),
+            t.expectString(payload["registered_name"]),
+            payload["trade_name"] == null ? null : t.expectString(payload["trade_name"]),
         );
     }
 }

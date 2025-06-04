@@ -1,4 +1,5 @@
-import { APIClient, APIResult } from "../../api_client.ts";
+import { APIClient } from "../../api_client.ts";
+import { APIResult } from "../../api_result.ts";
 import { SelfInfo } from "./self_payloads.ts";
 
 export class SelfClient {

@@ -1,5 +1,8 @@
-import { assertObject, assertString, assertVariant } from "../../utils.ts";
-import { InstantLike, IntoMoneyPayload, Money, MoneyPayload, PlainDateLike } from "../../types.ts";
+import { InstantCompat } from "../../types/instant_compat.ts";
+import { Money } from "../../types/money.ts";
+import { MoneyLike, MoneyPayload } from "../../types/money_payload.ts";
+import { PlainDateCompat } from "../../types/plain_date_compat.ts";
+import * as t from "../../utils/type_utils.ts";
 
 export type OrderStatus = "PENDING" | "CONFIRMED" | "FULFILLED" | "CANCELLED";
 
@@ -11,24 +14,24 @@ export class Order {
         public readonly orderNumber: string,
         public readonly status: OrderStatus,
         public readonly customer: OrderCustomerInfo | null,
-        public readonly date: PlainDateLike,
+        public readonly date: PlainDateCompat,
         public readonly totalAmount: Money,
         public readonly note: string | null,
         public readonly paymentLink: string | null,
-        public readonly creationTime: InstantLike,
+        public readonly creationTime: InstantCompat,
     ) {}
 
     public static fromPayload(payload: Record<string, unknown>): Order {
         return new Order(
-            assertString(payload["id"]),
-            assertString(payload["order_number"]),
-            assertVariant(ORDER_STATUS_VARIANTS, payload["status"]),
-            payload["customer"] == null ? null : OrderCustomerInfo.fromPayload(assertObject(payload["customer"])),
-            PlainDateLike.fromPayload(assertString(payload["date"])),
-            Money.fromPayload(assertString(payload["total_amount"])),
-            payload["note"] == null ? null : assertString(payload["note"]),
-            payload["payment_link"] == null ? null : assertString(payload["payment_link"]),
-            InstantLike.fromPayload(assertString(payload["creation_time"])),
+            t.expectString(payload["id"]),
+            t.expectString(payload["order_number"]),
+            t.expectVariant(ORDER_STATUS_VARIANTS, payload["status"]),
+            payload["customer"] == null ? null : OrderCustomerInfo.fromPayload(t.expectRecord(payload["customer"])),
+            PlainDateCompat.fromPayload(t.expectString(payload["date"])),
+            Money.fromPayload(t.expectString(payload["total_amount"])),
+            payload["note"] == null ? null : t.expectString(payload["note"]),
+            payload["payment_link"] == null ? null : t.expectString(payload["payment_link"]),
+            InstantCompat.fromPayload(t.expectString(payload["creation_time"])),
         );
     }
 }
@@ -38,20 +41,22 @@ export class OrderCustomerInfo {
         public readonly id: string,
         public readonly registeredName: string,
         public readonly tradeName: string | null,
+        public readonly customerCode: string | null,
     ) {}
 
     public static fromPayload(payload: Record<string, unknown>): OrderCustomerInfo {
         return new OrderCustomerInfo(
-            assertString(payload["id"]),
-            assertString(payload["registered_name"]),
-            payload["trade_name"] == null ? null : assertString(payload["trade_name"]),
+            t.expectString(payload["id"]),
+            t.expectString(payload["registered_name"]),
+            payload["trade_name"] == null ? null : t.expectString(payload["trade_name"]),
+            payload["customer_code"] == null ? null : t.expectString(payload["customer_code"]),
         );
     }
 }
 
 export interface OrderCreateParams {
     customerID: string,
-    totalAmount: IntoMoneyPayload,
+    totalAmount: MoneyLike,
     note?: string | null,
 }
 
@@ -61,4 +66,4 @@ export function OrderCreatePayload(params: OrderCreateParams) {
         "total_amount": MoneyPayload(params.totalAmount),
         "note": params.note,
     };
-};
+}

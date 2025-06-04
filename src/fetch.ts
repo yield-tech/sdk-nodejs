@@ -1,6 +1,4 @@
-export interface HTTPClient {
-    fetch(url: string, init?: RequestInitLike): Promise<ResponseLike>,
-}
+export type FetchLike = (url: string, init?: RequestInitLike) => Promise<ResponseLike>;
 
 export interface RequestInitLike {
     method?: string,
@@ -22,10 +20,4 @@ export interface ResponseLike {
 
 export interface HeadersLike {
     get(name: string): string | null,
-}
-
-export class FetchHTTPClient implements HTTPClient {
-    constructor(
-        public fetch: (url: string, init?: RequestInitLike) => Promise<ResponseLike>,
-    ) {}
 }
